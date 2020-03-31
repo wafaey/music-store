@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import Genre from './Genre';
+import axios from 'axios'
 import './App.css';
 
-function App() {
+const App = () =>{
+  const APP_ID = '403464';
+  const URI ='http://localhost:3007/'
+  const checkAUth = async () =>{
+  window.open(`https://connect.deezer.com/oauth/auth.php?app_id=${APP_ID}&redirect_uri=${URI}&perms=basic_access,email`,'popup','width=600,height=600');
+  getGenres();
+    }
+  const api = axios.create({
+    baseURL: 'https://cors-anywhere.herokuapp.com/https://api.deezer.com'
+  });
+
+ const [genres, setGenres] = useState([]);
+  useEffect(()=>{checkAUth()
+  }, []);
+ 
+  const getGenres = async () =>{
+    api
+    .get('/genre')
+    .then(res => setGenres(res.data.data))
+    .catch(err => console.log('err', err));
+    
+ }   
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="genres">
+    {genres.map(genre => ( 
+    <Genre
+    key={genre.id}
+    id={genre.id}
+    title={genre.name}
+    src={genre.picture_big}
+    />
+     ) 
+    )
+    }
+    </div>
     </div>
   );
 }

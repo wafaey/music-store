@@ -1,0 +1,33 @@
+.genre{
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px black;
+    margin: 20px;
+    display: inline-block;
+    flex-direction: column;
+    justify-content: space-around;
+    background: gray;
+    align-items: center;
+    max-width: 28%;
+    max-height: 35%;
+}
+.image{
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    margin-top: 20px;
+
+}
+.modal{
+    background: aliceblue;
+    text-align: center;
+    margin-left: 15%;
+    margin-top: 5%;
+    width: 70%;
+    height: 70%;
+}
+.all_Artists{
+    overflow: scroll;
+    max-height: 100%;
+    contain: content;
+
+}
